@@ -13,7 +13,6 @@ Where continent is not null
 order by 3,4
 
 
-
 -- looking at total cases vs total deaths
 -- shows the likelihood of dying if you contract covid in your country
 
@@ -22,7 +21,6 @@ From `CovidDeaths`
 Where location like '%states%'
 and Where continent is not null
 order by 1,2
-
 
 
 -- looking at total cases vs population
@@ -35,7 +33,6 @@ Where continent is not null
 order by 1,2
 
 
-
 --  Looking at countries with highest infection rate compared to population
 
 Select location, population, MAX(total_cases) as HighestInfectionCount, Max((total_cases/population))*100 as PercentPopulationInfected
@@ -46,7 +43,6 @@ Group by location, population
 order by PercentPopulationInfected desc
 
 
-
 -- showing the countries with the highest death couth per population
 
 Select location, MAX(total_deaths) as TotalDeathCount 
@@ -55,7 +51,6 @@ From `CovidDeaths`
 Where continent is not null
 Group by location
 order by TotalDeathCount desc
-
 
 
 -- breakings things down by continent
@@ -69,7 +64,6 @@ Group by continent
 order by TotalDeathCount desc
 
 
-
 -- global numbers of covid
 
 Select date, SUM(new_cases) as total_cases, SUM(new_deaths) as total_deaths, SUM(new_deaths)/SUM(New_Cases)*100 as DeathPercentage
@@ -79,7 +73,6 @@ group by date
 order by 1,2
 
 
-
 -- joining coviddeaths and covidvaccinations tables
 
 Select *
@@ -87,7 +80,6 @@ From `CovidDeaths` dea
 Join `CovidVaccinations` vac
 	On dea.location = vac.location
 	and dea.date = vac.date
-
 
 
 -- looking at total population vs vaccinations	
@@ -101,7 +93,6 @@ Join `CovidVaccinations` vac
 	and dea.date = vac.date
 where dea.continent is not NULL
 order by 2,3
-
 
 
 -- Using Common Table Expression
@@ -122,7 +113,6 @@ where dea.continent is not NULL
 )
 Select *, (RollingPeopleVaccinated/population)*100
 From PopvsVac
-
 
 
 -- Creating TEMP TABLE
@@ -150,7 +140,6 @@ where dea.continent is not NULL
 
 Select *, (RollingPeopleVaccinated/population)*100
 From PercentPopulationVaccinated
-
 
 
 -- Creating View to store data for later visualizations
