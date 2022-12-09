@@ -5,7 +5,7 @@ A quick SQL analysis of Covid Data
 Topics analyzed:
 
 - Likelihood of dying if contacted covid in a specific country
-- Finding the percentage of population that have gotten covid
+- Finding the percentage of population that had gotten covid
 - Looking at countries with highest infection rate compared to population
 - Finding the countries with the highest death count per population
 - Continents with the highest death count per population
