@@ -13,7 +13,6 @@ order by 3,4
 
 -- looking at total cases vs total deaths
 -- shows the likelihood of dying if you contract covid in your country
-
 Select location, date, total_cases, total_deaths, (total_deaths/total_cases)*100 as DeathPercentage
 From `CovidDeaths`
 Where location like '%states%'
@@ -23,7 +22,6 @@ order by 1,2
 
 -- looking at total cases vs population
 -- shows what percentage of population got covid
-
 Select location, date, population, total_cases, (total_deaths/population)*100 as PercentPopulationInfected
 From `CovidDeaths`
 -- Where location like '%states%'
@@ -32,7 +30,6 @@ order by 1,2
 
 
 --  Looking at countries with highest infection rate compared to population
-
 Select location, population, MAX(total_cases) as HighestInfectionCount, Max((total_cases/population))*100 as PercentPopulationInfected
 From `CovidDeaths`
 -- Where location like '%states%'
@@ -42,7 +39,6 @@ order by PercentPopulationInfected desc
 
 
 -- showing the countries with the highest death couth per population
-
 Select location, MAX(total_deaths) as TotalDeathCount 
 From `CovidDeaths`
 -- Where location like '%states%'
@@ -53,7 +49,6 @@ order by TotalDeathCount desc
 
 -- breakings things down by continent
 -- showing the continents with the highest death count per population
-
 Select continent, MAX(total_deaths) as TotalDeathCount 
 From `CovidDeaths`
 -- Where location like '%states%'
@@ -63,7 +58,6 @@ order by TotalDeathCount desc
 
 
 -- global numbers of covid
-
 Select date, SUM(new_cases) as total_cases, SUM(new_deaths) as total_deaths, SUM(new_deaths)/SUM(New_Cases)*100 as DeathPercentage
 From `CovidDeaths`
 where continent is not null
@@ -72,7 +66,6 @@ order by 1,2
 
 
 -- joining coviddeaths and covidvaccinations tables
-
 Select *
 From `CovidDeaths` dea
 Join `CovidVaccinations` vac
@@ -81,7 +74,6 @@ Join `CovidVaccinations` vac
 
 
 -- looking at total population vs vaccinations	
-
 Select dea.continent, dea.location, dea.date, dea.population, vac.new_vaccinations
 , SUM(vac.new_vaccinations) OVER (Partition by dea.location Order By dea.location, dea.date) as RollingPeopleVaccinated
 -- , (RollingPeopleVaccinated/Population)*100)
@@ -95,7 +87,6 @@ order by 2,3
 
 -- Using Common Table Expression
 -- Finding percentage of rolling population vaccinated
-
 With PopvsVac (continent, location, date, population, new_vaccinations, RollingPeopleVaccinated)
 as
 (
@@ -141,7 +132,6 @@ From PercentPopulationVaccinated
 
 
 -- Creating View to store data for later visualizations
-
 Create View PercentPopulationVaccinated as 
 Select dea.continent, dea.location, dea.date, dea.population, vac.new_vaccinations
 , SUM(vac.new_vaccinations) OVER (Partition by dea.location Order By dea.location, dea.date) as RollingPeopleVaccinated
@@ -155,4 +145,3 @@ where dea.continent is not NULL
 
 Select *
 From PercentPopulationVaccinated
-
