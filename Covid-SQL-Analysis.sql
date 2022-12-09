@@ -1,12 +1,10 @@
 -- Initial look at the data in CovidDeaths
-
 SELECT *
 FROM `CovidDeaths`
 WHERE continent is not null
 order by 3,4
 
 -- Another look at the data
-
 Select location, date, total_cases, new_cases, total_deaths, population
 From `CovidDeaths`
 Where continent is not null
