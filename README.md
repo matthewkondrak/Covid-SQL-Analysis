@@ -10,7 +10,7 @@ Topics analyzed:
 - Finding the countries with the highest death count per population
 - Continents with the highest death count per population
 - Global numbers of covid
-- Joining two tables for more analysis
+- Joining two tables (Covid Deaths Dataset and Covid Vaccinations Dataset) for more analysis
 - Finding percentage of rolling population vaccinated
 - Creating Temporary Tables
 - Creating Table View to store data for later visualizations
